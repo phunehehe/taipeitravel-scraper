@@ -3,12 +3,13 @@
 curl='curl --silent'
 base_url='http://www.taipeitravel.net/frontsite/en/sceneryEnSearchAction.do?recordCount=26&jumpToMaxRecord=50&cityId=1&fieldValue=&block=-1&menuId=1030501&method=doSearch&fieldName=10&city=1'
 delimiter=" '"
+output='index.html'
 
 quoted_value() {
     grep -o "'.*'" | tr -d "'"
 }
 
-cat header.html > maps.html
+cat header.html > "$output"
 
 $curl "$base_url" |
     grep scenerySerNo |
@@ -23,7 +24,7 @@ $curl "$base_url" |
         page="$($curl $url)"
         lon="$(echo "$page" | grep "lng = '" | tail -n 1 | quoted_value)"
         lat="$(echo "$page" | grep "lat = '" | tail -n 1 | quoted_value)"
-        echo "'$url': ['$title', new google.maps.LatLng($lat, $lon)]," >> maps.html
+        echo "'$url': ['$title', new google.maps.LatLng($lat, $lon)]," >> "$output"
     done
 
-cat footer.html >> maps.html
+cat footer.html >> "$output"
