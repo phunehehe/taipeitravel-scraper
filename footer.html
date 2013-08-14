@@ -1,0 +1,46 @@
+    };
+
+    var mapOptions = {
+        zoom: 12,
+        center: new google.maps.LatLng(1, 1),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+
+    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    var infoWindow = new google.maps.InfoWindow();
+
+    for (var url in myLatLngs) {
+
+        var myLatlng = myLatLngs[url][1];
+
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            url: url,
+            title: myLatLngs[url][0]
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+            content = '<a href="' + this.url + '">' + this.title + '</a>';
+            infoWindow.setContent(content);
+            infoWindow.open(map, this);
+        });
+    }
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            map.setCenter(initialLocation);
+        });
+    }
+}
+
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+  </body>
+</html>

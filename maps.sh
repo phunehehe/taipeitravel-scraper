@@ -1,0 +1,29 @@
+#!/bin/bash
+
+curl='curl --silent'
+base_url='http://www.taipeitravel.net/frontsite/en/sceneryEnSearchAction.do?recordCount=26&jumpToMaxRecord=50&cityId=1&fieldValue=&block=-1&menuId=1030501&method=doSearch&fieldName=10&city=1'
+delimiter=" '"
+
+quoted_value() {
+    grep -o "'.*'" | tr -d "'"
+}
+
+cat header.html > maps.html
+
+$curl "$base_url" |
+    grep scenerySerNo |
+    grep -o "'.*'" |
+    cut -d "'" -f2,4 |
+    sed -e 's/^ *//g' -e 's/ *$//g' |
+    sort -u |
+    while read line
+    do
+        url="http://www.taipeitravel.net/${line%$delimiter*}"
+        title="${line#*$delimiter}"
+        page="$($curl $url)"
+        lon="$(echo "$page" | grep "lng = '" | tail -n 1 | quoted_value)"
+        lat="$(echo "$page" | grep "lat = '" | tail -n 1 | quoted_value)"
+        echo "'$url': ['$title', new google.maps.LatLng($lat, $lon)]," >> maps.html
+    done
+
+cat footer.html >> maps.html
