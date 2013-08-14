@@ -25,6 +25,8 @@ $curl "$base_url" |
         lon="$(echo "$page" | grep "lng = '" | tail -n 1 | quoted_value)"
         lat="$(echo "$page" | grep "lat = '" | tail -n 1 | quoted_value)"
         echo "'$url': ['$title', new google.maps.LatLng($lat, $lon)]," >> "$output"
+        echo "$title"
+        sleep 1
     done
 
 cat footer.html >> "$output"
