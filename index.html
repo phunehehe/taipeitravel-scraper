@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Oh My Map</title>
+    <link href="default.css" rel="stylesheet">
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script>
+
+
+function initialize() {
+
+    var myLatLngs = {
+'http://www.taipeitravel.net//frontsite/en/sceneryEnListAction.do?method=doFindByPk&menuId=1030501&scenerySerNo=2011051800000071': ['Zhongyi Mountain Path', new google.maps.LatLng(25.13619, 121.478292)],
+'http://www.taipeitravel.net//frontsite/en/sceneryEnListAction.do?method=doFindByPk&menuId=1030501&scenerySerNo=2011051800000075': ['Guizikeng Hillside Path', new google.maps.LatLng(25.151118, 121.491177)],
+'http://www.taipeitravel.net//frontsite/en/sceneryEnListAction.do?method=doFindByPk&menuId=1030501&scenerySerNo=2011051800000079': ['Zhongzheng Mountain and Zhuzihu Area', new google.maps.LatLng(25.150156, 121.520512)],
+'http://www.taipeitravel.net//frontsite/en/sceneryEnListAction.do?method=doFindByPk&menuId=1030501&scenerySerNo=2011051800000083': ['The Junjianyan and Danfeng Area', new google.maps.LatLng(25.118903, 121.513981)],
+'http://www.taipeitravel.net//frontsite/en/sceneryEnListAction.do?method=doFindByPk&menuId=1030501&scenerySerNo=2011051800000521': ['Daluntou & Dalunwei Mountains', new google.maps.LatLng(25.105627, 121.585242)],
+'http://www.taipeitravel.net//frontsite/en/sceneryEnListAction.do?method=doFindByPk&menuId=1030501&scenerySerNo=2011051800000534': ['Bailusi Mountain', new google.maps.LatLng(25.077111, 121.600517)],
+'http://www.taipeitravel.net//frontsite/en/sceneryEnListAction.do?method=doFindByPk&menuId=1030501&scenerySerNo=2011051800000538': ['Jinmian & Jiandaoshi Mountain', new google.maps.LatLng(25.087603, 121.568393)],
+'http://www.taipeitravel.net//frontsite/en/sceneryEnListAction.do?method=doFindByPk&menuId=1030501&scenerySerNo=2011051800000554': ['Xianjiyan Area', new google.maps.LatLng(24.991055, 121.543913)],
+'http://www.taipeitravel.net//frontsite/en/sceneryEnListAction.do?method=doFindByPk&menuId=1030501&scenerySerNo=2011051800000558': ['Maokong Area', new google.maps.LatLng(24.984413, 121.581059)],
+'http://www.taipeitravel.net//frontsite/en/sceneryEnListAction.do?method=doFindByPk&menuId=1030501&scenerySerNo=2011051800000562': ['Zhinan Temple Area', new google.maps.LatLng(24.96799, 121.590104)],
+'http://www.taipeitravel.net//frontsite/en/sceneryEnListAction.do?method=doFindByPk&menuId=1030501&scenerySerNo=2011102500000002': ['Neigou River Scenic and Ecological Trail', new google.maps.LatLng(25.08037, 121.62398)],
+'http://www.taipeitravel.net//frontsite/en/sceneryEnListAction.do?method=doFindByPk&menuId=1030501&scenerySerNo=2011102700000005': ['Wuzhi Mountains – Jiantan Mountain Trail', new google.maps.LatLng(25.078758, 121.542048)],
+'http://www.taipeitravel.net//frontsite/en/sceneryEnListAction.do?method=doFindByPk&menuId=1030501&scenerySerNo=2011102700000006': ['Wuzhi Mountains – Zhongyong Mountain & Liyu Mountain Trai', new google.maps.LatLng(25.089136, 121.597526)],
+'http://www.taipeitravel.net//frontsite/en/sceneryEnListAction.do?method=doFindByPk&menuId=1030501&scenerySerNo=2011111300000009': ['Qixing Mountains - Tianmu Historic Trail', new google.maps.LatLng(25.126878, 121.534101)],
+'http://www.taipeitravel.net//frontsite/en/sceneryEnListAction.do?method=doFindByPk&menuId=1030501&scenerySerNo=2011111300000010': ['Qixing Mountains - Old Pingding Canal Trail', new google.maps.LatLng(25.134289, 121.586731)],
+'http://www.taipeitravel.net//frontsite/en/sceneryEnListAction.do?method=doFindByPk&menuId=1030501&scenerySerNo=2011111300000011': ['Nangang Mountains – Nangang Mountain Trail', new google.maps.LatLng(25.028081, 121.659142)],
+'http://www.taipeitravel.net//frontsite/en/sceneryEnListAction.do?method=doFindByPk&menuId=1030501&scenerySerNo=2011111300000013': ['Nangang Mountains – Nangang Mountain Trail', new google.maps.LatLng(25.025728, 121.586208)],
+'http://www.taipeitravel.net//frontsite/en/sceneryEnListAction.do?method=doFindByPk&menuId=1030501&scenerySerNo=2011111300000015': ['Nangang Mountains – Lishanqiaokou Trail', new google.maps.LatLng(25.025592, 121.599340)],
+'http://www.taipeitravel.net//frontsite/en/sceneryEnListAction.do?method=doFindByPk&menuId=1030501&scenerySerNo=2011111300000017': ['Nangang Mountains – Hushan Trail', new google.maps.LatLng(25.030161, 121.583633)],
+'http://www.taipeitravel.net//frontsite/en/sceneryEnListAction.do?method=doFindByPk&menuId=1030501&scenerySerNo=2011111300000018': ['Nangang Mountains –Xiangshan Trail', new google.maps.LatLng(25.027206, 121.570801)],
+'http://www.taipeitravel.net//frontsite/en/sceneryEnListAction.do?method=doFindByPk&menuId=1030501&scenerySerNo=2012021300000001': ['Datun Mountain System: Guandu Hiking Trail', new google.maps.LatLng(25.124904, 121.465255)],
+'http://www.taipeitravel.net//frontsite/en/sceneryEnListAction.do?method=doFindByPk&menuId=1030501&scenerySerNo=2012062000000017': ['Bihu Hiking Trail', new google.maps.LatLng(25.088918, 121.591965)],
+'http://www.taipeitravel.net//frontsite/en/sceneryEnListAction.do?method=doFindByPk&menuId=1030501&scenerySerNo=2012062000000023': ['Baishihu Suspension Bridge', new google.maps.LatLng(25.097787, 121.588799)],
+'http://www.taipeitravel.net//frontsite/en/sceneryEnListAction.do?method=doFindByPk&menuId=1030501&scenerySerNo=2012062000000029': ['Neishuangxi Forest Park', new google.maps.LatLng(25.115364, 121.577094)],
+'http://www.taipeitravel.net//frontsite/en/sceneryEnListAction.do?method=doFindByPk&menuId=1030501&scenerySerNo=2013051500000004': ['Erziping Trail', new google.maps.LatLng(25.15364, 121.547862)],
+'http://www.taipeitravel.net//frontsite/en/sceneryEnListAction.do?method=doFindByPk&menuId=1030501&scenerySerNo=2013051500000007': ['Qingtiangang Grassland', new google.maps.LatLng(25.167169, 121.574090)],
+    };
+
+    var mapOptions = {
+        zoom: 12,
+        center: new google.maps.LatLng(1, 1),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+
+    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    var infoWindow = new google.maps.InfoWindow();
+
+    for (var url in myLatLngs) {
+
+        var myLatlng = myLatLngs[url][1];
+
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            url: url,
+            title: myLatLngs[url][0]
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+            content = '<a href="' + this.url + '">' + this.title + '</a>';
+            infoWindow.setContent(content);
+            infoWindow.open(map, this);
+        });
+    }
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            map.setCenter(initialLocation);
+        });
+    }
+}
+
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+  </body>
+</html>
