@@ -6,6 +6,8 @@ and creates a map with a pin for each point of interest. The main purpose is to
 get an overview of the distance between those locations. Open the generated
 `index.html` in a browser to see the map.
 
+Or just look here http://phunehehe.github.io/taipeitravel-scraper/
+
 As it is, the map shows the locations of hiking trails in Taipei. It should be
 trivial to adapt the script to map other things (museums, temples, libraries
 etc.).
